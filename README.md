@@ -18,96 +18,76 @@ The mobile application becomes a digital channel, while Credit Force remains the
 ---
 
 ## High-Level Architecture
-┌────────────────────────────────────────────┐
-│             Mobile Application             │
-│                iOS / Android               │
-└─────────────────┬──────────────────────────┘
-                  │
-                  │ HTTPS/TLS
-                  ▼
+┌─────────────────────────────────────────────────────────┐
+│ Mobile Application │
+│ iOS / Android │
+└─────────────────────────┬───────────────────────────────┘
+│
+│ HTTPS/TLS
+▼
+┌─────────────────────────────────────────────────────────┐
+│ API Gateway │
+│─────────────────────────────────────────────────────────│
+│ Authentication │ Authorization │ Rate Limiting │
+│ API Routing │ API Versioning │ Monitoring │
+└─────────────────────────┬───────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────────────────┐
+│ Identity & Access Management │
+│─────────────────────────────────────────────────────────│
+│ OAuth2 │ OpenID Connect │ MFA │
+│ JWT Token Issuance │
+└─────────────────────────┬───────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────────────────┐
+│ Banking Services Layer │
+│─────────────────────────────────────────────────────────│
+│ Customer Service │ Loan Service │ Account Service │
+│ Payment Service │ Notification │ Document Service │
+│ Audit Service │
+└─────────────────────────┬───────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────────────────┐
+│ Integration Layer / ESB │
+│─────────────────────────────────────────────────────────│
+│ Transformation │ Validation │ Protocol Trans. │
+│ Error Handling │ Orchestration │
+└─────────────────────────┬───────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────────────────┐
+│ Credit Force Core Banking System │
+│─────────────────────────────────────────────────────────│
+│ Customer Mgmt │ Loan Management │ Repayment Proc. │
+│ Loan Amendments │ Credit Operations │
+└─────────────────────────┬───────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────────────────┐
+│ Credit Force Database │
+└─────────────────────────────────────────────────────────┘
 
-┌────────────────────────────────────────────┐
-│               API Gateway                  │
-│--------------------------------------------│
-│ Authentication                             │
-│ Authorization                              │
-│ Rate Limiting                              │
-│ API Routing                                │
-│ API Versioning                             │
-│ Monitoring                                 │
-└─────────────────┬──────────────────────────┘
-                  │
-                  ▼
+EVENT-DRIVEN LAYER
 
-┌────────────────────────────────────────────┐
-│         Identity & Access Management       │
-│--------------------------------------------│
-│ OAuth2                                     │
-│ OpenID Connect                             │
-│ MFA                                        │
-│ JWT Token Issuance                         │
-└─────────────────┬──────────────────────────┘
-                  │
-                  ▼
-
-┌────────────────────────────────────────────┐
-│            Banking Services Layer          │
-├────────────────────────────────────────────┤
-│ Customer Service                           │
-│ Loan Service                               │
-│ Account Service                            │
-│ Payment Service                            │
-│ Notification Service                       │
-│ Document Service                           │
-│ Audit Service                              │
-└─────────────────┬──────────────────────────┘
-                  │
-                  ▼
-
-┌────────────────────────────────────────────┐
-│         Integration Layer / ESB            │
-├────────────────────────────────────────────┤
-│ Transformation                             │
-│ Validation                                 │
-│ Protocol Translation                       │
-│ Error Handling                             │
-│ Orchestration                              │
-└─────────────────┬──────────────────────────┘
-                  │
-                  ▼
-
-┌────────────────────────────────────────────┐
-│       Credit Force Core Banking System     │
-│--------------------------------------------│
-│ Customer Management                        │
-│ Loan Management                            │
-│ Repayment Processing                        │
-│ Loan Amendments                            │
-│ Credit Operations                          │
-└─────────────────┬──────────────────────────┘
-                  │
-                  ▼
-
-┌────────────────────────────────────────────┐
-│         Credit Force Database              │
-└────────────────────────────────────────────┘
-
-
-              EVENT-DRIVEN LAYER
-
-┌────────────────────────────────────────────┐
-│ Azure Service Bus / RabbitMQ               │
-└─────────────────┬──────────────────────────┘
-                  │
-      ┌───────────┼─────────────┐
-      ▼           ▼             ▼
-
-Notification   Audit        Analytics
-Service        Service      Service
-
-SMS            Audit Logs   BI Reports
-Email          Compliance   Dashboards
-Push Alerts
+┌─────────────────────────────────────────────────────────┐
+│ Azure Service Bus / RabbitMQ │
+└─────────────┬────────────────────┬─────────────────────┘
+│ │
+┌───────┼────────┐ ┌────────┼──────────┐
+▼ ▼ ▼ ▼ ▼ ▼
+┌─────────┐ ┌──────┐ ┌─────────┐ ┌──────┐ ┌─────────┐
+│Notifica-│ │Audit │ │Analytics│ │SMS │ │Email │
+│tion │ │Service│ │Service │ │ │ │ │
+│Service │ │ │ │ │ │ │ │ │
+└─────────┘ └──────┘ └─────────┘ └──────┘ └─────────┘
+│ │ │ │ │
+▼ ▼ ▼ ▼ ▼
+Push Audit BI SMS Email
+Alerts Logs Reports Alerts Alerts
+Compliance Dashboards
 
 
 ---
