@@ -18,7 +18,6 @@ The mobile application becomes a digital channel, while Credit Force remains the
 ---
 
 ## High-Level Architecture
-High-Level Architecture
 ┌────────────────────────────────────────────┐
 │             Mobile Application             │
 │                iOS / Android               │
@@ -110,7 +109,6 @@ SMS            Audit Logs   BI Reports
 Email          Compliance   Dashboards
 Push Alerts
 
-text
 
 ---
 
@@ -131,7 +129,6 @@ Integration Layer
 ↓
 Credit Force
 
-text
 
 **Benefits:**
 
@@ -301,7 +298,7 @@ Customer opens the Loan Dashboard.
 
 Flow
 
-text
+
 Mobile App
     ↓
 API Gateway
@@ -331,7 +328,6 @@ Customer requests additional credit.
 
 Flow
 
-text
 Mobile App
     ↓
 Loan Service
@@ -365,7 +361,7 @@ Credit Force currently supports changing customer loans. This capability should 
 
 Request
 
-text
+
 PUT /api/loans/{loanId}
 Payload:
 
@@ -376,7 +372,6 @@ json
 }
 Processing
 
-text
 Mobile App
      ↓
 Loan Service
@@ -431,7 +426,6 @@ Reporting should never query Credit Force directly.
 
 Instead:
 
-text
 Credit Force
       ↓
 Data Replication
@@ -503,7 +497,6 @@ Azure Monitor
 Distributed Tracing
 Using OpenTelemetry. Trace a request across:
 
-text
 Mobile App
 API Gateway
 Loan Service
@@ -532,7 +525,6 @@ Action Performed
 
 Example:
 
-text
 Loan Updated
 User: 12345
 Old Amount: $100.00
