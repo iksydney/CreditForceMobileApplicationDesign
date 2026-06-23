@@ -18,94 +18,96 @@ The mobile application becomes a digital channel, while Credit Force remains the
 ---
 
 ## High-Level Architecture
+High-Level Architecture
 ┌────────────────────────────────────────────┐
-│ Mobile Application │
-│ iOS / Android │
+│             Mobile Application             │
+│                iOS / Android               │
 └─────────────────┬──────────────────────────┘
-│
-│ HTTPS/TLS
-▼
+                  │
+                  │ HTTPS/TLS
+                  ▼
 
 ┌────────────────────────────────────────────┐
-│ API Gateway │
+│               API Gateway                  │
 │--------------------------------------------│
-│ Authentication │
-│ Authorization │
-│ Rate Limiting │
-│ API Routing │
-│ API Versioning │
-│ Monitoring │
+│ Authentication                             │
+│ Authorization                              │
+│ Rate Limiting                              │
+│ API Routing                                │
+│ API Versioning                             │
+│ Monitoring                                 │
 └─────────────────┬──────────────────────────┘
-│
-▼
+                  │
+                  ▼
 
 ┌────────────────────────────────────────────┐
-│ Identity & Access Management │
+│         Identity & Access Management       │
 │--------------------------------------------│
-│ OAuth2 │
-│ OpenID Connect │
-│ MFA │
-│ JWT Token Issuance │
+│ OAuth2                                     │
+│ OpenID Connect                             │
+│ MFA                                        │
+│ JWT Token Issuance                         │
 └─────────────────┬──────────────────────────┘
-│
-▼
+                  │
+                  ▼
 
 ┌────────────────────────────────────────────┐
-│ Banking Services Layer │
+│            Banking Services Layer          │
 ├────────────────────────────────────────────┤
-│ Customer Service │
-│ Loan Service │
-│ Account Service │
-│ Payment Service │
-│ Notification Service │
-│ Document Service │
-│ Audit Service │
+│ Customer Service                           │
+│ Loan Service                               │
+│ Account Service                            │
+│ Payment Service                            │
+│ Notification Service                       │
+│ Document Service                           │
+│ Audit Service                              │
 └─────────────────┬──────────────────────────┘
-│
-▼
+                  │
+                  ▼
 
 ┌────────────────────────────────────────────┐
-│ Integration Layer / ESB │
+│         Integration Layer / ESB            │
 ├────────────────────────────────────────────┤
-│ Transformation │
-│ Validation │
-│ Protocol Translation │
-│ Error Handling │
-│ Orchestration │
+│ Transformation                             │
+│ Validation                                 │
+│ Protocol Translation                       │
+│ Error Handling                             │
+│ Orchestration                              │
 └─────────────────┬──────────────────────────┘
-│
-▼
+                  │
+                  ▼
 
 ┌────────────────────────────────────────────┐
-│ Credit Force Core Banking System │
+│       Credit Force Core Banking System     │
 │--------------------------------------------│
-│ Customer Management │
-│ Loan Management │
-│ Repayment Processing │
-│ Loan Amendments │
-│ Credit Operations │
+│ Customer Management                        │
+│ Loan Management                            │
+│ Repayment Processing                        │
+│ Loan Amendments                            │
+│ Credit Operations                          │
 └─────────────────┬──────────────────────────┘
-│
-▼
+                  │
+                  ▼
 
 ┌────────────────────────────────────────────┐
-│ Credit Force Database │
+│         Credit Force Database              │
 └────────────────────────────────────────────┘
 
-EVENT-DRIVEN LAYER
+
+              EVENT-DRIVEN LAYER
 
 ┌────────────────────────────────────────────┐
-│ Azure Service Bus / RabbitMQ │
+│ Azure Service Bus / RabbitMQ               │
 └─────────────────┬──────────────────────────┘
-│
-┌───────────┼─────────────┐
-▼ ▼ ▼
+                  │
+      ┌───────────┼─────────────┐
+      ▼           ▼             ▼
 
-Notification Audit Analytics
-Service Service Service
+Notification   Audit        Analytics
+Service        Service      Service
 
-SMS Audit Logs BI Reports
-Email Compliance Dashboards
+SMS            Audit Logs   BI Reports
+Email          Compliance   Dashboards
 Push Alerts
 
 text
