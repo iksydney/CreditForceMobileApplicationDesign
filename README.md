@@ -379,7 +379,8 @@ json
   "newAmount": 133.33,
   "newTenure": 12
 }
-Processing
+```
+##Processing
 
 Mobile App
      ↓
@@ -399,7 +400,7 @@ Customer Notification Sent
 Event-Driven Architecture
 For non-transactional activities, asynchronous processing should be used.
 
-Events
+##Events
 CustomerRegistered
 
 LoanCreated
@@ -414,7 +415,7 @@ RepaymentReceived
 
 DocumentUploaded
 
-Benefits
+##Benefits
 Loose coupling
 
 Improved scalability
@@ -430,7 +431,7 @@ RabbitMQ
 
 Apache Kafka (for larger scale)
 
-Operational Data Store (ODS)
+##Operational Data Store (ODS)
 Reporting should never query Credit Force directly.
 
 Instead:
@@ -548,6 +549,7 @@ Regulatory compliance
 Fraud investigations
 
 Recommended Technology Stack (.NET)
+
 Layer	Technology
 Mobile App	Flutter / React Native / Native iOS & Android
 API Gateway	Azure API Management
@@ -562,7 +564,8 @@ Logging	ELK Stack
 CI/CD	Azure DevOps
 Containerization	Docker
 Orchestration	Kubernetes (AKS)
-Final Recommendation
+
+##Final Recommendation
 The recommended architecture positions Credit Force as the authoritative core banking platform, while introducing a secure, scalable, and loosely coupled digital banking layer around it.
 
 The mobile application interacts only with dedicated banking APIs, which enforce business rules and integrate with Credit Force through an Integration Layer. Security is provided through OAuth2/OpenID Connect, asynchronous processing through Azure Service Bus, performance through Redis caching, and governance through centralized monitoring and audit services.
