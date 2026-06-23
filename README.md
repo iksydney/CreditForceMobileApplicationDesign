@@ -18,69 +18,106 @@ The mobile application becomes a digital channel, while Credit Force remains the
 ---
 
 ## High-Level Architecture
-+--------------------------------------------------+
-| Mobile Application |
-| iOS / Android |
-+--------------------------------------------------+
-| |
-| HTTPS/TLS |
-| |
-+--------------------------------------------------+
 
-API Gateway
-Authentication	Authorization
-Rate Limiting	API Routing
-API Versioning	Monitoring
-+--------------------------------------------------+
-+--------------------------------------------------+
-Identity & Access Management
---------------------------------------------------
-OAuth2	OpenID Connect
-MFA	JWT Token Issuance
-+--------------------------------------------------+
-+--------------------------------------------------+
-Banking Services Layer
---------------------------------------------------
-Customer Service	Loan Service
-Account Service	Payment Service
-Notification Serv.	Document Service
-Audit Service	
-+--------------------------------------------------+
-+--------------------------------------------------+
-Integration Layer / ESB
---------------------------------------------------
-Transformation	Validation
-Protocol Trans.	Error Handling
-Orchestration	
-+--------------------------------------------------+
-+--------------------------------------------------+
-Credit Force Core Banking System
---------------------------------------------------
-Customer Mgmt	Loan Management
-Repayment Proc.	Loan Amendments
-Credit Operations	
-+--------------------------------------------------+
-+--------------------------------------------------+
-Credit Force Database
-+--------------------------------------------------+
-EVENT-DRIVEN LAYER
+### Layer 1: Mobile Application
+- Platform: iOS / Android
+- Protocol: HTTPS / TLS
 
-+--------------------------------------------------+
-| Azure Service Bus / RabbitMQ |
-+--------------------------------------------------+
-| |
-| +------------+------------+ |
-| | | | |
-| v v v |
-+--------------------------------------------------+
-| Notification | Audit | Analytics |
-| Service | Service | Service |
-|--------------------------------------------------|
-| SMS | Audit Logs | BI Reports |
-| Email | Compliance | Dashboards |
-| Push Alerts | | |
-+--------------------------------------------------+
+---
 
+### Layer 2: API Gateway
+- Authentication
+- Authorization
+- Rate Limiting
+- API Routing
+- API Versioning
+- Monitoring
+
+---
+
+### Layer 3: Identity & Access Management
+- OAuth2
+- OpenID Connect
+- MFA (Multi-Factor Authentication)
+- JWT Token Issuance
+
+---
+
+### Layer 4: Banking Services Layer
+- Customer Service
+- Loan Service
+- Account Service
+- Payment Service
+- Notification Service
+- Document Service
+- Audit Service
+
+---
+
+### Layer 5: Integration Layer / ESB
+- Transformation
+- Validation
+- Protocol Translation
+- Error Handling
+- Orchestration
+
+---
+
+### Layer 6: Credit Force Core Banking System
+- Customer Management
+- Loan Management
+- Repayment Processing
+- Loan Amendments
+- Credit Operations
+
+---
+
+### Layer 7: Credit Force Database
+- System of Record
+- Core Banking Data Store
+
+---
+
+### Event-Driven Layer
+
+#### Message Broker
+- Azure Service Bus / RabbitMQ
+
+#### Event Consumers
+| Service | Outputs |
+|---------|---------|
+| Notification Service | SMS, Email, Push Alerts |
+| Audit Service | Audit Logs, Compliance |
+| Analytics Service | BI Reports, Dashboards |
+
+---
+
+### Data Flow Direction
+Top to Bottom (Request Flow):
+1. Mobile Application → 
+2. API Gateway → 
+3. Identity & Access Management → 
+4. Banking Services Layer → 
+5. Integration Layer / ESB → 
+6. Credit Force Core Banking System → 
+7. Credit Force Database
+
+---
+
+### Technology Stack Summary
+
+| Layer | Technology |
+|-------|-----------|
+| Mobile App | Flutter / React Native / Native iOS & Android |
+| API Gateway | Azure API Management |
+| Identity | Azure Entra ID / Keycloak |
+| Backend Services | ASP.NET Core (.NET 8) |
+| Messaging | Azure Service Bus / RabbitMQ |
+| Cache | Redis |
+| Database | SQL Server |
+| Document Storage | Azure Blob Storage |
+| Monitoring | Azure Application Insights |
+| Logging | ELK Stack |
 
 ---
 
